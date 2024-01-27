@@ -110,7 +110,8 @@ class _TileState extends State<Tile> {
 
   void _loadTileset() async {
     final tileBuffer = await DefaultAssetBundle.of(context)
-        .load('assets/seamarks-bodensee-12-2152-1429.mvt');
+        //.load('seamarks-12-2152-1429.mvt');
+        .load('seamarks-9-269-178.mvt');
     final tileBytes = tileBuffer.buffer
         .asUint8List(tileBuffer.offsetInBytes, tileBuffer.lengthInBytes);
     var tileData = TileFactory(theme, Logger.noop())
