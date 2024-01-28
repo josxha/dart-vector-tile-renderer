@@ -56,7 +56,7 @@ class CircleRenderer extends FeatureRenderer {
     for (var center in centerPoints) {
       // TODO check if circle is in TileClip
       context.canvas.drawCircle(
-          center, effectivePaint.radius ?? 5, effectivePaint.paint());
+          center, 0.2, effectivePaint.paint());
     }
   }
 }
