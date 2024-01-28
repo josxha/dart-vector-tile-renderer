@@ -111,7 +111,7 @@ TilePoint _intersectingClipY(
     ClipArea clip, double alpha, TilePoint inside, TilePoint point) {
   var x = point.x;
   var y = (point.y < clip.top) ? clip.top : clip.bottom;
-  final beta = _nineteDegrees - alpha;
+  final beta = _ninetyDegrees - alpha;
   final lengthA = _delta(y, inside.y);
   final lengthB = lengthA * tan(beta);
   if (point.x > inside.x) {
@@ -124,7 +124,7 @@ TilePoint _intersectingClipY(
 
 double _delta(double a, double b) => ((a < b) ? (b - a) : (a - b)).abs();
 
-const _nineteDegrees = (90 * pi / 180);
+const _ninetyDegrees = (90 * pi / 180);
 
 extension _TileLineList on List<TileLine> {
   void addLine(List<TilePoint> points) {

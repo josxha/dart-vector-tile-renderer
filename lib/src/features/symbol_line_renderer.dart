@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:vector_tile_renderer/src/constants.dart';
+
 import '../../vector_tile_renderer.dart';
 import '../context.dart';
 import '../themes/expression/expression.dart';
@@ -249,9 +251,8 @@ class _RenderBox {
 
 const _minPathMetricSize = 100.0;
 
-const _degToRad = pi / 180.0;
 const _rotationOvershot = 3;
-const _rotationShiftUpper = (90 + _rotationOvershot) * _degToRad;
-const _rotationShiftLower = -(90 + _rotationOvershot) * _degToRad;
-const _rotationShift = (180 * _degToRad);
-const _ninetyDegrees = 90 * _degToRad;
+const _rotationShiftUpper = (90 + _rotationOvershot) * deg2Rad;
+const _rotationShiftLower = -(90 + _rotationOvershot) * deg2Rad;
+const _rotationShift = (180 * deg2Rad);
+const _ninetyDegrees = 90 * deg2Rad;
