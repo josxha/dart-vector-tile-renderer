@@ -65,7 +65,8 @@ class DefaultLayer extends ThemeLayer {
 class BackgroundLayer extends ThemeLayer {
   final Expression<Color> fillColor;
 
-  const BackgroundLayer(String id, this.fillColor, Map<String, dynamic> metadata)
+  const BackgroundLayer(
+      String id, this.fillColor, Map<String, dynamic> metadata)
       : super(id, ThemeLayerType.background,
             minzoom: 0, maxzoom: 24, metadata: metadata);
 

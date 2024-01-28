@@ -25,7 +25,8 @@ class ToStringExpressionParser extends ExpressionComponentParser {
 }
 
 class CoalesceExpressionParser extends ExpressionComponentParser {
-  const CoalesceExpressionParser(ExpressionParser parser) : super(parser, 'coalesce');
+  const CoalesceExpressionParser(ExpressionParser parser)
+      : super(parser, 'coalesce');
 
   @override
   bool matches(List<dynamic> json) {
@@ -47,7 +48,8 @@ class CoalesceExpressionParser extends ExpressionComponentParser {
 }
 
 class ConcatExpressionParser extends ExpressionComponentParser {
-  const ConcatExpressionParser(ExpressionParser parser) : super(parser, 'concat');
+  const ConcatExpressionParser(ExpressionParser parser)
+      : super(parser, 'concat');
 
   @override
   bool matches(List<dynamic> json) {
@@ -69,7 +71,8 @@ class ConcatExpressionParser extends ExpressionComponentParser {
 }
 
 class StringExpressionParser extends ExpressionComponentParser {
-  const StringExpressionParser(ExpressionParser parser) : super(parser, 'string');
+  const StringExpressionParser(ExpressionParser parser)
+      : super(parser, 'string');
 
   @override
   bool matches(List<dynamic> json) {

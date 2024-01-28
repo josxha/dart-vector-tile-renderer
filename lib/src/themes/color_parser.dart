@@ -12,7 +12,7 @@ class ColorParser {
         return (zoom) => color;
       }
     } else if (colorSpec is Map) {
-      final model = ColorFunctionModelFactory().create(colorSpec);
+      final model = const ColorFunctionModelFactory().create(colorSpec);
       if (model != null) {
         return (zoom) => ColorThemeFunction().exponential(model, zoom);
       }

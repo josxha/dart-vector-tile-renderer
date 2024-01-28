@@ -41,15 +41,15 @@ class IconRenderer extends SymbolIcon {
         .map((e) => e.area.translate(offset.dx, offset.dy))
         .reduce((a, b) => a.expandToInclude(b));
     final contentArea = segments
-        .map((e) => e.contentArea)
-        .whereNotNull()
-        .firstOrNull
-        ?.translate(renderedArea.left, renderedArea.top) ??
+            .map((e) => e.contentArea)
+            .whereNotNull()
+            .firstOrNull
+            ?.translate(renderedArea.left, renderedArea.top) ??
         renderedArea;
     var rotation =
-    withRotation && rotationAlignment == RotationAlignment.viewport
-        ? context.rotation
-        : 0.0;
+        withRotation && rotationAlignment == RotationAlignment.viewport
+            ? context.rotation
+            : 0.0;
     if (rotate != null) {
       rotation += (rotate! * deg2Rad);
     }
@@ -67,14 +67,13 @@ class IconRenderer extends SymbolIcon {
         atlas,
         segments
             .map((e) => RSTransform.fromComponents(
-            rotation: 0.0,
-            scale: e.scale,
-            anchorX:
-            0, // rotation == 0.0 ? 0 : offset.dx + anchorOffset.dx,
-            anchorY:
-            0, //rotation == 0.0 ? 0 : offset.dy + anchorOffset.dy,
-            translateX: offset.dx + anchorOffset.dx,
-            translateY: offset.dy + anchorOffset.dy))
+                rotation: 0.0,
+                scale: e.scale,
+                anchorX:
+                    0, // rotation == 0.0 ? 0 : offset.dx + anchorOffset.dx,
+                anchorY: 0, //rotation == 0.0 ? 0 : offset.dy + anchorOffset.dy,
+                translateX: offset.dx + anchorOffset.dx,
+                translateY: offset.dy + anchorOffset.dy))
             .toList(),
         segments.map((e) => e.imageSource).toList(),
         null,
@@ -118,8 +117,7 @@ class IconRenderer extends SymbolIcon {
     if (context.zoomScaleFactor > 1.0) {
       margin *= context.zoomScaleFactor;
     }
-    final spriteContentWidth =
-        (spriteContent[2] - spriteContent[0]).toDouble();
+    final spriteContentWidth = (spriteContent[2] - spriteContent[0]).toDouble();
     final spriteContentHeight =
         (spriteContent[3] - spriteContent[1]).toDouble();
     final desiredContentWidth = contentWidth + (2 * margin);

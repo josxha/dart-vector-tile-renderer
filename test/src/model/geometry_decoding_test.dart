@@ -120,7 +120,7 @@ void main() {
       expect(polygons, hasLength(1));
 
       final polygonMetrics =
-      UiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
+          UiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
       expect(polygonMetrics, hasLength(1));
 
       final ringMetric = polygonMetrics[0];
@@ -166,7 +166,7 @@ void main() {
       ]).toList();
 
       final polygonMetrics =
-      UiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
+          UiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
       expect(polygonMetrics, hasLength(2));
 
       final innerRingMetric = polygonMetrics[1];

@@ -6,7 +6,8 @@ import '../test_tile.dart';
 
 void main() {
   test('matches features with a selector', () async {
-    final selector = SelectorFactory(testLogger).create(_minorRoadThemeLayer);
+    final selector =
+        const SelectorFactory(testLogger).create(_minorRoadThemeLayer);
     final tile =
         await readTestTile(ProvidedThemes.lightTheme(logger: testLogger));
     final transportationLayer =

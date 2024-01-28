@@ -8,7 +8,7 @@ import '../test_logger.dart';
 
 void main() {
   test('reads a sprite index', () async {
-    final index = SpriteIndexReader(logger: testLogger).read(
+    final index = const SpriteIndexReader(logger: testLogger).read(
         jsonDecode(utf8.decode(await readTestFile('sample_sprites.json'))));
     expect(index, isNotNull);
     final firstSprite = index.spriteByName['first-sprite']!;

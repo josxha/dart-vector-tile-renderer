@@ -67,7 +67,7 @@ const lightThemeData = <String, dynamic>{
   "name": "OSM Liberty",
   "metadata": {
     "maputnik:license":
-    "https://github.com/maputnik/osm-liberty/blob/gh-pages/LICENSE.md",
+        "https://github.com/maputnik/osm-liberty/blob/gh-pages/LICENSE.md",
     "maputnik:renderer": "mbgljs",
     "openmaptiles:version": "3.x",
     "version": "2021-08-22"
@@ -87,8 +87,7 @@ const lightThemeData = <String, dynamic>{
     }
   },
   "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
-  "glyphs":
-  "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
   "layers": [
     {
       "id": "background",
@@ -887,15 +886,7 @@ const lightThemeData = <String, dynamic>{
       "filter": [
         "all",
         ["!in", "brunnel", "bridge", "tunnel"],
-        [
-          "!in",
-          "class",
-          "pedestrian",
-          "path",
-          "track",
-          "service",
-          "motorway"
-        ],
+        ["!in", "class", "pedestrian", "path", "track", "service", "motorway"],
         ["==", "ramp", 1]
       ],
       "layout": {"line-cap": "round", "line-join": "round"},
@@ -2136,15 +2127,7 @@ const lightThemeData = <String, dynamic>{
       "source-layer": "place",
       "filter": [
         "all",
-        [
-          "in",
-          "class",
-          "hamlet",
-          "island",
-          "islet",
-          "neighbourhood",
-          "suburb"
-        ]
+        ["in", "class", "hamlet", "island", "islet", "neighbourhood", "suburb"]
       ],
       "layout": {
         "text-field": "{name_en}",

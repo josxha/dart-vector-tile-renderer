@@ -8,7 +8,7 @@ import 'extensions.dart';
 void main() {
   test('reads a vector tile', () async {
     final bytes = await File('test_data/sample_tile.pbf').readAsBytes();
-    final tile = VectorTileReader().read(bytes);
+    final tile = const VectorTileReader().read(bytes);
     expect(tile, isNotNull);
     expect(
         tile.layers.map((e) => e.name).toSet().toList().sorted(),

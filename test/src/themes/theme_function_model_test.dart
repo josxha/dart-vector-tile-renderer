@@ -10,7 +10,7 @@ void main() {
         [12, "hsla(35, 57%, 88%, 0.49)"]
       ]
     };
-    final model = ColorFunctionModelFactory().create(definition);
+    final model = const ColorFunctionModelFactory().create(definition);
     expect(model, isNotNull);
     expect(model!.base, isNull);
     expect(model.stops, hasLength(2));
@@ -25,7 +25,7 @@ void main() {
         [20, 2]
       ]
     };
-    final model = DoubleFunctionModelFactory().create(definition);
+    final model = const DoubleFunctionModelFactory().create(definition);
     expect(model, isNotNull);
     expect(model!.base, 1.4);
     expect(model.stops, hasLength(2));
