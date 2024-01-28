@@ -1,9 +1,11 @@
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:example/tile_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_tile_renderer/vector_tile_renderer.dart';
-import 'dart:ui' as ui;
+
+import 'seamark_theme.dart';
 
 enum RenderMode { vector, raster }
 
@@ -65,7 +67,7 @@ class Tile extends StatefulWidget {
 
 class _TileState extends State<Tile> {
   Tileset? tileset;
-  final theme = ProvidedThemes.lightTheme(logger: Logger.console());
+  final theme = ThemeReader(logger: Logger.console()).read(seamarkTheme);
   ui.Image? image;
   bool _disposed = false;
 
@@ -107,8 +109,8 @@ class _TileState extends State<Tile> {
   }
 
   void _loadTileset() async {
-    final tileBuffer =
-        await DefaultAssetBundle.of(context).load('assets/sample_tile.pbf');
+    final tileBuffer = await DefaultAssetBundle.of(context)
+        .load('seamarks-9-269-178.mvt');
     final tileBytes = tileBuffer.buffer
         .asUint8List(tileBuffer.offsetInBytes, tileBuffer.lengthInBytes);
     var tileData = TileFactory(theme, Logger.noop())
@@ -127,7 +129,7 @@ class _TileState extends State<Tile> {
     }
     final tile = tileData.toTile();
     final tileset = TilesetPreprocessor(theme)
-        .preprocess(Tileset({'openmaptiles': tile}), zoom: 14);
+        .preprocess(Tileset({'seamarksdach': tile}), zoom: 14);
     setState(() {
       this.tileset = tileset;
     });

@@ -3,6 +3,7 @@ import '../logger.dart';
 import '../model/tile_model.dart';
 import '../themes/style.dart';
 import '../themes/theme.dart';
+import 'circle_renderer.dart';
 import 'fill_renderer.dart';
 import 'line_renderer.dart';
 import 'symbol_line_renderer.dart';
@@ -56,6 +57,7 @@ class FeatureDispatcher extends FeatureRenderer {
       ThemeLayerType.fill: FillRenderer(logger),
       ThemeLayerType.fillExtrusion: FillRenderer(logger),
       ThemeLayerType.line: LineRenderer(logger),
+      ThemeLayerType.circle: CircleRenderer(logger),
     };
   }
 

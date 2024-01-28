@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 
 import '../logger.dart';
 import '../profiling.dart';
+import 'circle_paint_factory.dart';
 import 'expression/color_expression.dart';
 import 'expression/expression.dart';
 import 'expression/literal_expression.dart';
@@ -23,11 +24,13 @@ class ThemeReader {
   final Logger logger;
   late final SelectorFactory selectorFactory;
   late final PaintFactory paintFactory;
+  late final CirclePaintFactory circlePaintFactory;
   late final ExpressionParser expressionParser;
 
   ThemeReader({Logger? logger}) : logger = logger ?? const Logger.noop() {
     selectorFactory = SelectorFactory(this.logger);
     paintFactory = PaintFactory(this.logger);
+    circlePaintFactory = CirclePaintFactory(this.logger);
     expressionParser = ExpressionParser(this.logger);
   }
 
@@ -62,6 +65,8 @@ class ThemeReader {
       return _toSymbolTheme(jsonLayer);
     } else if (type == 'raster') {
       return _toRasterTheme(jsonLayer);
+    } else if (type == 'circle') {
+      return _toCircleTheme(jsonLayer);
     }
     logger.warn(() => 'theme layer type $type not implemented');
     return null;
@@ -146,6 +151,23 @@ class ThemeReader {
       return DefaultLayer(jsonLayer['id'] ?? _unknownId, ThemeLayerType.line,
           selector: selector,
           style: Style(linePaint: lineStyle),
+          minzoom: _minZoom(jsonLayer),
+          maxzoom: _maxZoom(jsonLayer),
+          metadata: _metadata(jsonLayer));
+    }
+    return null;
+  }
+
+  ThemeLayer? _toCircleTheme(jsonLayer) {
+    final selector = selectorFactory.create(jsonLayer);
+    final jsonPaint = jsonLayer['paint'];
+    final jsonLayout = jsonLayer['layout'];
+    final circleStyle = circlePaintFactory.create(_layerId(jsonLayer),
+        PaintingStyle.fill, 'circle', jsonPaint, jsonLayout);
+    if (circleStyle != null) {
+      return DefaultLayer(jsonLayer['id'] ?? _unknownId, ThemeLayerType.circle,
+          selector: selector,
+          style: Style(circlePaint: circleStyle),
           minzoom: _minZoom(jsonLayer),
           maxzoom: _maxZoom(jsonLayer),
           metadata: _metadata(jsonLayer));
