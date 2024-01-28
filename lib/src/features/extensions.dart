@@ -9,13 +9,9 @@ extension ImageContextExtension on Context {
 }
 
 extension LayoutAnchorExtension on LayoutAnchor {
-  Offset offset(Size size) {
-    switch (this) {
-      case LayoutAnchor.center:
-        return Offset(-size.width / 2, -size.height / 2);
-      case LayoutAnchor.top:
-        return Offset(-size.width / 2, 0);
-    }
-    throw 'Not implemented: $name';
-  }
+  Offset offset(Size size) => switch (this) {
+        LayoutAnchor.center => Offset(-size.width / 2, -size.height / 2),
+        LayoutAnchor.top => Offset(-size.width / 2, 0),
+        _ => throw 'Not implemented: $name',
+      };
 }

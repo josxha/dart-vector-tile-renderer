@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:collection/collection.dart';
+import 'package:vector_tile_renderer/src/constants.dart';
 
 import '../../vector_tile_renderer.dart';
 import '../context.dart';
@@ -31,63 +32,62 @@ class IconRenderer extends SymbolIcon {
       {required Size contentSize, required bool withRotation}) {
     final paint = Paint()..isAntiAlias = true;
 
-    double scale = sprite.pixelRatio == 1 ? 1 : (1 / (sprite.pixelRatio));
+    final scale = sprite.pixelRatio == 1 ? 1.0 : (1 / (sprite.pixelRatio));
 
     final segments = _fitContent(sprite, scale, contentSize: contentSize);
-    if (segments.isNotEmpty) {
-      final renderedArea = segments
-          .map((e) => e.area.translate(offset.dx, offset.dy))
-          .reduce((a, b) => a.expandToInclude(b));
-      final contentArea = segments
-              .map((e) => e.contentArea)
-              .whereNotNull()
-              .firstOrNull
-              ?.translate(renderedArea.left, renderedArea.top) ??
-          renderedArea;
-      var rotation =
-          withRotation && rotationAlignment == RotationAlignment.viewport
-              ? context.rotation
-              : 0.0;
-      if (rotate != null) {
-        rotation += (rotate! * pi / 180.0);
-      }
-      final anchorOffset = anchor.offset(renderedArea.size);
-      if (rotation != 0.0) {
-        context.canvas.save();
-        final rotationOffset = Offset(
-            offset.dx + anchorOffset.dx + (renderedArea.width / 2.0),
-            offset.dy + anchorOffset.dy + (renderedArea.height / 2.0));
-        context.canvas.translate(rotationOffset.dx, rotationOffset.dy);
-        context.canvas.rotate(-rotation);
-        context.canvas.translate(-rotationOffset.dx, -rotationOffset.dy);
-      }
-      context.canvas.drawAtlas(
-          atlas,
-          segments
-              .map((e) => RSTransform.fromComponents(
-                  rotation: 0.0,
-                  scale: e.scale,
-                  anchorX:
-                      0, // rotation == 0.0 ? 0 : offset.dx + anchorOffset.dx,
-                  anchorY:
-                      0, //rotation == 0.0 ? 0 : offset.dy + anchorOffset.dy,
-                  translateX: offset.dx + anchorOffset.dx,
-                  translateY: offset.dy + anchorOffset.dy))
-              .toList(),
-          segments.map((e) => e.imageSource).toList(),
-          null,
-          null,
-          null,
-          paint);
-      if (rotation != 0.0) {
-        context.canvas.restore();
-      }
-      return RenderedIcon(
-          overlapsText: sprite.content != null,
-          area: renderedArea,
-          contentArea: contentArea);
+    if (segments.isEmpty) return null;
+
+    final renderedArea = segments
+        .map((e) => e.area.translate(offset.dx, offset.dy))
+        .reduce((a, b) => a.expandToInclude(b));
+    final contentArea = segments
+        .map((e) => e.contentArea)
+        .whereNotNull()
+        .firstOrNull
+        ?.translate(renderedArea.left, renderedArea.top) ??
+        renderedArea;
+    var rotation =
+    withRotation && rotationAlignment == RotationAlignment.viewport
+        ? context.rotation
+        : 0.0;
+    if (rotate != null) {
+      rotation += (rotate! * deg2Rad);
     }
-    return null;
+    final anchorOffset = anchor.offset(renderedArea.size);
+    if (rotation != 0.0) {
+      context.canvas.save();
+      final rotationOffset = Offset(
+          offset.dx + anchorOffset.dx + (renderedArea.width / 2.0),
+          offset.dy + anchorOffset.dy + (renderedArea.height / 2.0));
+      context.canvas.translate(rotationOffset.dx, rotationOffset.dy);
+      context.canvas.rotate(-rotation);
+      context.canvas.translate(-rotationOffset.dx, -rotationOffset.dy);
+    }
+    context.canvas.drawAtlas(
+        atlas,
+        segments
+            .map((e) => RSTransform.fromComponents(
+            rotation: 0.0,
+            scale: e.scale,
+            anchorX:
+            0, // rotation == 0.0 ? 0 : offset.dx + anchorOffset.dx,
+            anchorY:
+            0, //rotation == 0.0 ? 0 : offset.dy + anchorOffset.dy,
+            translateX: offset.dx + anchorOffset.dx,
+            translateY: offset.dy + anchorOffset.dy))
+            .toList(),
+        segments.map((e) => e.imageSource).toList(),
+        null,
+        null,
+        null,
+        paint);
+    if (rotation != 0.0) {
+      context.canvas.restore();
+    }
+    return RenderedIcon(
+        overlapsText: sprite.content != null,
+        area: renderedArea,
+        contentArea: contentArea);
   }
 
   List<_Segment> _fitContent(Sprite sprite, double scale,
@@ -116,19 +116,19 @@ class IconRenderer extends SymbolIcon {
     final contentHeight = contentSize.height;
     double margin = contentHeight / 2;
     if (context.zoomScaleFactor > 1.0) {
-      margin = margin * context.zoomScaleFactor;
+      margin *= context.zoomScaleFactor;
     }
-    double spriteContentWidth =
+    final spriteContentWidth =
         (spriteContent[2] - spriteContent[0]).toDouble();
-    double spriteContentHeight =
+    final spriteContentHeight =
         (spriteContent[3] - spriteContent[1]).toDouble();
-    double desiredContentWidth = contentWidth + (2 * margin);
-    double desiredContentHeight = contentHeight + (2 * margin);
-    double desiredScale = max(desiredContentWidth / spriteContentWidth,
+    final desiredContentWidth = contentWidth + (2 * margin);
+    final desiredContentHeight = contentHeight + (2 * margin);
+    final desiredScale = max(desiredContentWidth / spriteContentWidth,
             desiredContentHeight / spriteContentHeight) *
         adjustedScale;
-    double actualWidth = (desiredScale * sprite.width);
-    double actualHeight = (desiredScale * sprite.height);
+    final actualWidth = (desiredScale * sprite.width);
+    final actualHeight = (desiredScale * sprite.height);
     final actualContentArea = Rect.fromLTRB(
         spriteContent[0] * desiredScale,
         spriteContent[1] * desiredScale,

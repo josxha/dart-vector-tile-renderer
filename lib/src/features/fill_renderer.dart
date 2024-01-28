@@ -17,9 +17,8 @@ class FillRenderer extends FeatureRenderer {
     TileLayer layer,
     TileFeature feature,
   ) {
-    if (!feature.hasPaths) {
-      return;
-    }
+    if (!feature.hasPaths) return;
+
     if (style.fillPaint == null && style.outlinePaint == null) {
       logger
           .warn(() => 'polygon does not have a fill paint or an outline paint');

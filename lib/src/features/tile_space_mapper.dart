@@ -21,17 +21,12 @@ class TileSpaceMapper {
   final double pixelsPerTileUnit;
   final Rect tileClipInTileUnits;
 
-  double widthFromPixelToTile(double value) {
-    return value / pixelsPerTileUnit;
-  }
+  double widthFromPixelToTile(double value) => value / pixelsPerTileUnit;
 
-  Offset pointFromTileToPixels(Offset point) {
-    return point * pixelsPerTileUnit;
-  }
+  Offset pointFromTileToPixels(Offset point) => point * pixelsPerTileUnit;
 
-  bool isPathWithinTileClip(BoundedPath path) {
-    return tileClipInTileUnits.overlaps(path.bounds);
-  }
+  bool isPathWithinTileClip(BoundedPath path) =>
+      tileClipInTileUnits.overlaps(path.bounds);
 
   void drawInTileSpace(void Function() fn) {
     canvas.save();

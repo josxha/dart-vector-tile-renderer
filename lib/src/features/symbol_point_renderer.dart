@@ -75,7 +75,7 @@ class SymbolPointRenderer extends FeatureRenderer {
         continue;
       }
 
-      double rotation = rotationAlignment == RotationAlignment.viewport
+      final rotation = rotationAlignment == RotationAlignment.viewport
           ? context.rotation
           : 0.0;
 
@@ -121,9 +121,7 @@ class SymbolPointRenderer extends FeatureRenderer {
     Offset offset,
   ) {
     final box = text.labelBox(offset, translated: true);
-    if (box == null) {
-      return false;
-    }
+    if (box == null) return false;
 
     if (!context.labelSpace.canOccupy(text.text, box) ||
         text.styledSymbol == null) {
@@ -153,7 +151,6 @@ class SymbolPointRenderer extends FeatureRenderer {
     }
 
     context.labelSpace.occupy(text.text, box);
-
     return true;
   }
 }

@@ -37,9 +37,7 @@ class LineRenderer extends FeatureRenderer {
         hasImage: context.hasImage);
 
     final paint = style.linePaint?.evaluate(evaluationContext);
-    if (paint == null) {
-      return;
-    }
+    if (paint == null) return;
 
     final effectivePaint = context.paintProvider.provide(evaluationContext,
         paint: linePaintExpression,
@@ -51,12 +49,11 @@ class LineRenderer extends FeatureRenderer {
         },
         widthModifier: (strokeWidth) =>
             context.tileSpaceMapper.widthFromPixelToTile(strokeWidth));
-    if (effectivePaint == null) {
-      return;
-    }
+    if (effectivePaint == null) return;
+
     final dashLengths = effectivePaint.strokeDashPattern;
     final lines = feature.paths;
-    for (var line in lines) {
+    for (final line in lines) {
       if (!context.optimizations.skipInBoundsChecks &&
           !context.tileSpaceMapper.isPathWithinTileClip(line)) {
         continue;

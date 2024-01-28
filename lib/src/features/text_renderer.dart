@@ -16,10 +16,12 @@ class TextApproximation {
   late final String text;
   Offset? _translation;
   Size? _size;
+
+  /// cached [renderer] value
   TextRenderer? _renderer;
 
+  /// cached [styledSymbol] value
   StyledSymbol? _symbol;
-  bool _symbolCreated = false;
 
   TextApproximation(
       this.context, this.evaluationContext, this.style, this.textLines) {
@@ -47,26 +49,16 @@ class TextApproximation {
   }
 
   Size? get size => _size;
+
   Offset? get translation => _translation;
 
   bool get hasRenderer => _renderer != null;
 
-  StyledSymbol? get styledSymbol {
-    if (!_symbolCreated) {
-      _symbol = _createStyledSymbol(context, evaluationContext, style, text);
-      _symbolCreated = true;
-    }
-    return _symbol;
-  }
+  StyledSymbol? get styledSymbol =>
+      _symbol ??= _createStyledSymbol(context, evaluationContext, style, text);
 
-  TextRenderer get renderer {
-    var result = _renderer;
-    if (result == null) {
-      result = TextRenderer(context, evaluationContext, style, styledSymbol!);
-      _renderer = result;
-    }
-    return result;
-  }
+  TextRenderer get renderer => _renderer ??=
+      TextRenderer(context, evaluationContext, style, styledSymbol!);
 
   Rect? labelBox(Offset offset, {required bool translated}) {
     if (size == null) {
@@ -79,37 +71,34 @@ class TextApproximation {
   StyledSymbol? _createStyledSymbol(Context context,
       EvaluationContext evaluationContext, Style style, String text) {
     final foreground = style.textPaint!.evaluate(evaluationContext);
-    if (foreground == null) {
-      return null;
-    }
+    if (foreground == null) return null;
+
     double? textSize =
         style.symbolLayout!.text!.textSize.evaluate(evaluationContext);
-    if (textSize != null) {
-      if (context.zoomScaleFactor > 1.0) {
-        textSize = textSize / context.zoomScaleFactor;
-      }
-      double? spacing = style.symbolLayout!.text!.textLetterSpacing
-          ?.evaluate(evaluationContext);
-      final shadows = style.textHalo?.evaluate(evaluationContext);
-      final textStyle = TextStyle(
-          foreground: foreground.paint(),
-          fontSize: textSize,
-          letterSpacing: spacing,
-          shadows: shadows,
-          fontFamily: style.symbolLayout!.text?.fontFamily,
-          fontStyle: style.symbolLayout!.text?.fontStyle);
-      final textTransform = style.symbolLayout!.text?.textTransform;
-      final transformedText =
-          textTransform == null ? text : textTransform(text) ?? text;
-      final alignment =
-          style.symbolLayout!.text?.justify.evaluate(evaluationContext);
-      return StyledSymbol(
-          style: SymbolStyle(
-              textAlign: alignment?.toTextAlign() ?? TextAlign.center,
-              textStyle: textStyle),
-          text: transformedText);
+    if (textSize == null) return null;
+
+    if (context.zoomScaleFactor > 1.0) {
+      textSize = textSize / context.zoomScaleFactor;
     }
-    return null;
+    double? spacing = style.symbolLayout!.text!.textLetterSpacing
+        ?.evaluate(evaluationContext);
+    final shadows = style.textHalo?.evaluate(evaluationContext);
+    final textStyle = TextStyle(
+        foreground: foreground.paint(),
+        fontSize: textSize,
+        letterSpacing: spacing,
+        shadows: shadows,
+        fontFamily: style.symbolLayout!.text?.fontFamily,
+        fontStyle: style.symbolLayout!.text?.fontStyle);
+    final textTransform = style.symbolLayout!.text?.textTransform;
+    final transformedText = textTransform?.call(text) ?? text;
+    final alignment =
+    style.symbolLayout!.text?.justify.evaluate(evaluationContext);
+    return StyledSymbol(
+        style: SymbolStyle(
+            textAlign: alignment?.toTextAlign() ?? TextAlign.center,
+            textStyle: textStyle),
+        text: transformedText);
   }
 }
 
@@ -127,8 +116,11 @@ class TextRenderer {
   }
 
   double get textHeight => _painter!.height;
+
   Size get size => Size(_painter!.width, _painter!.height);
+
   Offset? get translation => _translation;
+
   bool get canPaint => _painter != null;
 
   Rect? labelBox(Offset offset, {required bool translated}) {
@@ -140,7 +132,7 @@ class TextRenderer {
   }
 
   void render(Offset offset) {
-    TextPainter? painter = _painter;
+    final painter = _painter;
     if (painter == null) {
       return;
     }
@@ -177,16 +169,10 @@ Rect? _labelBox(Offset offset, Offset? translation, double width, double height,
 }
 
 extension _LayoutJustifyExtension on LayoutJustify {
-  TextAlign toTextAlign() {
-    if (this == LayoutJustify.center) {
-      return TextAlign.center;
-    }
-    if (this == LayoutJustify.left) {
-      return TextAlign.left;
-    }
-    if (this == LayoutJustify.right) {
-      return TextAlign.left;
-    }
-    return TextAlign.center;
-  }
+  TextAlign toTextAlign() => switch (this) {
+    LayoutJustify.center => TextAlign.center,
+    LayoutJustify.left => TextAlign.left,
+    LayoutJustify.right => TextAlign.left,
+    _ => TextAlign.center,
+  };
 }

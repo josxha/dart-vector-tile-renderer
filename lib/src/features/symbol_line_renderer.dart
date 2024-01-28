@@ -51,12 +51,12 @@ class SymbolLineRenderer extends FeatureRenderer {
         hasImage: context.hasImage);
 
     final text = symbolLayout.text?.text.evaluate(evaluationContext);
-    final icon = symbolLayout.getIcon(context, evaluationContext,
-        layoutPlacement: LayoutPlacement.line);
     if (text == null) {
       logger.warn(() => 'line with no text');
       return;
     }
+    final icon = symbolLayout.getIcon(context, evaluationContext,
+        layoutPlacement: LayoutPlacement.line);
 
     final rotationAlignment = symbolLayout.textRotationAlignment(
         evaluationContext,
@@ -115,6 +115,7 @@ class SymbolLineRenderer extends FeatureRenderer {
 
   bool _shouldRotateWithLine(
       RotationAlignment alignment, EvaluationContext evaluationContext) {
+    // TODO use evaluationContext
     if (alignment == RotationAlignment.viewport) {
       return false;
     }
@@ -123,12 +124,11 @@ class SymbolLineRenderer extends FeatureRenderer {
 
   _RenderBox? _findMiddleMetric(Context context, List<PathMetric> metrics,
       TextApproximation text, bool rotate) {
-    if (metrics.isEmpty) {
-      return null;
-    }
+    if (metrics.isEmpty) return null;
+
     final midpoint = metrics.length ~/ 2;
     for (int x = 0; x <= (midpoint + 1); ++x) {
-      int lower = midpoint - x;
+      final int lower = midpoint - x;
       if (lower >= 0 && metrics[lower].length > _minPathMetricSize) {
         final renderBox =
             _occupyLabelSpace(context, text, metrics[lower], rotate);
@@ -136,7 +136,7 @@ class SymbolLineRenderer extends FeatureRenderer {
           return renderBox;
         }
       }
-      int upper = midpoint + x;
+      final int upper = midpoint + x;
       if (upper != lower &&
           upper < metrics.length &&
           metrics[upper].length > _minPathMetricSize) {
@@ -158,63 +158,58 @@ class SymbolLineRenderer extends FeatureRenderer {
   ) {
     Tangent? getTangentForOffsetInPixels(double distance) {
       final tangent = metric.getTangentForOffset(distance);
-      if (tangent != null) {
-        final angle = rotate ? -tangent.angle : 0.0;
-        return Tangent.fromAngle(
-          context.tileSpaceMapper.pointFromTileToPixels(tangent.position),
-          angle,
-        );
-      }
-      return null;
+      if (tangent == null) return null;
+
+      return Tangent.fromAngle(
+        context.tileSpaceMapper.pointFromTileToPixels(tangent.position),
+        rotate ? -tangent.angle : 0.0,
+      );
     }
 
     Tangent? tangent = getTangentForOffsetInPixels(metric.length / 2);
-    _RenderBox? renderBox;
-    if (tangent != null) {
-      renderBox = _occupyLabelSpaceAtTangent(context, text, tangent);
-      if (renderBox == null) {
-        tangent = getTangentForOffsetInPixels(metric.length / 4);
-        if (tangent != null) {
-          renderBox = _occupyLabelSpaceAtTangent(context, text, tangent);
-          if (renderBox == null) {
-            tangent = getTangentForOffsetInPixels(metric.length * 3 / 4);
-            if (tangent != null) {
-              renderBox = _occupyLabelSpaceAtTangent(context, text, tangent);
-            }
-          }
-        }
-      }
-    }
+    if (tangent == null) return null;
+    _RenderBox? renderBox = _occupyLabelSpaceAtTangent(context, text, tangent);
+    if (renderBox != null) return renderBox;
+
+    tangent = getTangentForOffsetInPixels(metric.length / 4);
+    if (tangent == null) return null;
+    renderBox = _occupyLabelSpaceAtTangent(context, text, tangent);
+    if (renderBox != null) return renderBox;
+
+    tangent = getTangentForOffsetInPixels(metric.length * 3 / 4);
+    if (tangent == null) return null;
+    renderBox = _occupyLabelSpaceAtTangent(context, text, tangent);
     return renderBox;
   }
 
   _RenderBox? _occupyLabelSpaceAtTangent(
       Context context, TextApproximation text, Tangent tangent) {
     final box = text.labelBox(tangent.position, translated: false);
-    if (box != null) {
-      final textSpace = _textSpace(box, text.translation, tangent);
-      if (context.labelSpace.canOccupy(text.text, textSpace) &&
-          text.styledSymbol != null) {
-        var preciseBox = _preciselyOccupyLabelSpaceAtTangent(
-            context, text.renderer, tangent);
-        preciseBox ??= _RenderBox(box, tangent);
-        return preciseBox;
-      }
+    if (box == null) return null;
+
+    final textSpace = _textSpace(box, text.translation, tangent);
+    if (!context.labelSpace.canOccupy(text.text, textSpace) ||
+        text.styledSymbol == null) {
+      return null;
     }
-    return null;
+
+    var preciseBox = _preciselyOccupyLabelSpaceAtTangent(
+        context, text.renderer, tangent);
+    return preciseBox ?? _RenderBox(box, tangent);
   }
 
   _RenderBox? _preciselyOccupyLabelSpaceAtTangent(
       Context context, TextRenderer renderer, Tangent tangent) {
     final box = renderer.labelBox(tangent.position, translated: false);
-    if (box != null) {
-      final textSpace = _textSpace(box, renderer.translation, tangent);
-      if (context.labelSpace.canOccupy(renderer.symbol.text, textSpace)) {
-        context.labelSpace.occupy(renderer.symbol.text, textSpace);
-        return _RenderBox(textSpace, tangent);
-      }
+    if (box == null) return null;
+
+    final textSpace = _textSpace(box, renderer.translation, tangent);
+    if (!context.labelSpace.canOccupy(renderer.symbol.text, textSpace)) {
+      return null;
     }
-    return null;
+
+    context.labelSpace.occupy(renderer.symbol.text, textSpace);
+    return _RenderBox(textSpace, tangent);
   }
 
   double _rightSideUpAngle(double radians) {

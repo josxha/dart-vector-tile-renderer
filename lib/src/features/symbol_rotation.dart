@@ -4,7 +4,7 @@ import '../themes/style.dart';
 extension SymbolRotation on SymbolLayout {
   RotationAlignment textRotationAlignment(EvaluationContext evaluationContext,
       {required LayoutPlacement layoutPlacement}) {
-    var textRotationAlignment =
+    final textRotationAlignment =
         text?.rotationAlignment?.evaluate(evaluationContext) ??
             RotationAlignment.auto;
     return _rotationAlignment(
@@ -13,7 +13,7 @@ extension SymbolRotation on SymbolLayout {
 
   RotationAlignment iconRotationAlignment(EvaluationContext evaluationContext,
       {required LayoutPlacement layoutPlacement}) {
-    var iconRotationAlignment =
+    final iconRotationAlignment =
         icon?.rotationAlignment?.evaluate(evaluationContext) ??
             RotationAlignment.auto;
     return _rotationAlignment(
@@ -22,15 +22,16 @@ extension SymbolRotation on SymbolLayout {
 
   RotationAlignment _rotationAlignment(EvaluationContext evaluationContext,
       RotationAlignment rotationAlignment, LayoutPlacement layoutPlacement) {
-    if (rotationAlignment == RotationAlignment.auto) {
-      final placement =
-          this.placement.evaluate(evaluationContext) ?? layoutPlacement;
-      if (placement == LayoutPlacement.point) {
-        rotationAlignment = RotationAlignment.viewport;
-      } else {
-        rotationAlignment = RotationAlignment.map;
-      }
+    if (rotationAlignment != RotationAlignment.auto) {
+      return rotationAlignment;
     }
-    return rotationAlignment;
+
+    final placement =
+        this.placement.evaluate(evaluationContext) ?? layoutPlacement;
+    if (placement == LayoutPlacement.point) {
+      return RotationAlignment.viewport;
+    } else {
+      return RotationAlignment.map;
+    }
   }
 }

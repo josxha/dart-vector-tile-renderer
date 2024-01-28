@@ -35,35 +35,32 @@ class FeatureDispatcher extends FeatureRenderer {
     TileLayer layer,
     TileFeature feature,
   ) {
-    FeatureRenderer? delegate;
-    if (layerType == ThemeLayerType.symbol) {
-      delegate = symbolTypeToRenderer[feature.type];
-    } else {
-      delegate = typeToRenderer[layerType];
-    }
+    final delegate = switch (layerType) {
+      ThemeLayerType.symbol => symbolTypeToRenderer[feature.type],
+      _ => typeToRenderer[layerType],
+    };
 
     if (delegate == null) {
       logger.warn(() =>
           'layer type $layerType feature ${feature.type} is not implemented');
-    } else {
-      delegate.render(context, layerType, style, layer, feature);
+      return;
     }
+
+    delegate.render(context, layerType, style, layer, feature);
   }
 
   static Map<ThemeLayerType, FeatureRenderer> createDispatchMapping(
-      Logger logger) {
-    return {
-      ThemeLayerType.fill: FillRenderer(logger),
-      ThemeLayerType.fillExtrusion: FillRenderer(logger),
-      ThemeLayerType.line: LineRenderer(logger),
-    };
-  }
+          Logger logger) =>
+      {
+        ThemeLayerType.fill: FillRenderer(logger),
+        ThemeLayerType.fillExtrusion: FillRenderer(logger),
+        ThemeLayerType.line: LineRenderer(logger),
+      };
 
   static Map<TileFeatureType, FeatureRenderer> createSymbolDispatchMapping(
-      Logger logger) {
-    return {
-      TileFeatureType.point: SymbolPointRenderer(logger),
-      TileFeatureType.linestring: SymbolLineRenderer(logger),
-    };
-  }
+          Logger logger) =>
+      {
+        TileFeatureType.point: SymbolPointRenderer(logger),
+        TileFeatureType.linestring: SymbolLineRenderer(logger),
+      };
 }
