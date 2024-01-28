@@ -17,7 +17,7 @@ const Map<String, dynamic> seamarkTheme = {
       "maxzoom": 9
     }
   },
-  "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
+  "sprite": "https://s3.bodensee-navigator.com/test/maps/seamark-sprites/sprites",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
