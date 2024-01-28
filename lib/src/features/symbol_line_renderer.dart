@@ -63,7 +63,7 @@ class SymbolLineRenderer extends FeatureRenderer {
         layoutPlacement: LayoutPlacement.line);
     bool rotateWithLine =
         _shouldRotateWithLine(rotationAlignment, evaluationContext);
-    final textAbbreviation = TextAbbreviator().abbreviate(text);
+    final textAbbreviation = TextAbbreviator.abbreviate(text);
     if (!context.labelSpace.canAccept(textAbbreviation)) {
       return;
     }

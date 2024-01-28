@@ -46,7 +46,7 @@ class SymbolPointRenderer extends FeatureRenderer {
       return;
     }
     final textAbbreviation =
-        text == null ? null : TextAbbreviator().abbreviate(text);
+        text == null ? null : TextAbbreviator.abbreviate(text);
     if (textAbbreviation != null &&
         !context.labelSpace.canAccept(textAbbreviation)) {
       return;

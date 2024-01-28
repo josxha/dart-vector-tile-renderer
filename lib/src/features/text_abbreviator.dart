@@ -1,7 +1,5 @@
-TextAbbreviator _instance = TextAbbreviator._();
-
-class TextAbbreviator {
-  final Map<String, String> _wordReplacements = {
+abstract class TextAbbreviator {
+  static const Map<String, String> _wordReplacements = {
     'Alley': 'Aly',
     'Anex': 'Anx',
     'Arcade': 'Arc',
@@ -49,10 +47,8 @@ class TextAbbreviator {
     'View': 'Vw',
     'Way': 'Wy',
   };
-  factory TextAbbreviator() => _instance;
-  TextAbbreviator._();
 
-  String abbreviate(String text) {
+  static String abbreviate(String text) {
     final parts = text.split(RegExp(r'\s+'));
     if (parts.isEmpty) {
       return text;
@@ -63,7 +59,7 @@ class TextAbbreviator {
     return parts.join(' ');
   }
 
-  String _replace(String word) {
+  static String _replace(String word) {
     return _wordReplacements[word] ?? word;
   }
 }
