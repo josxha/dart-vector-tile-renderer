@@ -16,6 +16,7 @@ class Style {
   final Expression<PaintModel>? fillPaint;
   final Extrusion? fillExtrusion;
   final Expression<PaintModel>? linePaint;
+  final Expression<PaintModel>? circlePaint;
   final Expression<PaintModel>? textPaint;
   final SymbolLayout? symbolLayout;
   final Expression<List<Shadow>>? textHalo;
@@ -26,6 +27,7 @@ class Style {
       this.fillExtrusion,
       this.outlinePaint,
       this.linePaint,
+      this.circlePaint,
       this.textPaint,
       this.symbolLayout,
       this.textHalo});

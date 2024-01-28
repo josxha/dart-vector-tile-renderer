@@ -11,6 +11,7 @@ class PaintModel {
   final PaintingStyle paintingStyle;
   final Color color;
   final double? strokeWidth;
+  final double? radius;
   final List<double>? strokeDashPattern;
   final LineCap? lineCap;
   final LineJoin? lineJoin;
@@ -22,9 +23,10 @@ class PaintModel {
       {required this.paintingStyle,
       required this.color,
       required this.strokeWidth,
+      this.radius,
       required this.lineCap,
       required this.lineJoin,
-      required this.strokeDashPattern})
+      this.strokeDashPattern})
       : _hashCode = Object.hash(paintingStyle, color, strokeWidth, lineCap,
             lineJoin, _equality.hash(strokeDashPattern));
 
@@ -35,6 +37,7 @@ class PaintModel {
       other.paintingStyle == paintingStyle &&
       other.color == color &&
       other.strokeWidth == strokeWidth &&
+      other.radius == radius &&
       other.lineCap == lineCap &&
       other.lineJoin == lineJoin &&
       _equality.equals(other.strokeDashPattern, strokeDashPattern);
