@@ -6,7 +6,7 @@ class RasterTile {
   final Image image;
   final Rect scope;
 
-  RasterTile({required this.image, required this.scope});
+  const RasterTile({required this.image, required this.scope});
 }
 
 /// A raster tileset is a collection of raster tiles (images) by `'source'` ID,

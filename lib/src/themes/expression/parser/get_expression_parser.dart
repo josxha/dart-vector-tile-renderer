@@ -3,7 +3,7 @@ import '../property_expression.dart';
 import 'expression_parser.dart';
 
 class GetExpressionParser extends ExpressionComponentParser {
-  GetExpressionParser(ExpressionParser parser) : super(parser, 'get');
+  const GetExpressionParser(ExpressionParser parser) : super(parser, 'get');
 
   @override
   bool matches(List<dynamic> json) {

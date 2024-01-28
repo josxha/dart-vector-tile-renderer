@@ -90,13 +90,13 @@ class _EntryCache<T> {
 class _CacheEntry<T> {
   final T? value;
 
-  _CacheEntry(this.value);
+  const _CacheEntry(this.value);
 }
 
 const _equality = ListEquality();
 
 abstract class _CacheKey {
-  _CacheKey();
+  const _CacheKey();
 }
 
 class _SingularCacheKey extends _CacheKey {

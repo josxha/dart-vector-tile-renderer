@@ -5,7 +5,7 @@ import '../interpolate_expression.dart';
 import 'expression_parser.dart';
 
 class InterpolateExpressionParser extends ExpressionComponentParser {
-  InterpolateExpressionParser(ExpressionParser parser)
+  const InterpolateExpressionParser(ExpressionParser parser)
       : super(parser, 'interpolate');
 
   @override

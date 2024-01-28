@@ -12,7 +12,7 @@ class EvaluationContext {
   final bool Function(String) hasImage;
   final Logger logger;
 
-  EvaluationContext(this._properties, this._featureType, this.logger,
+  const EvaluationContext(this._properties, this._featureType, this.logger,
       {required this.zoom,
       required this.zoomScaleFactor,
       required this.hasImage});

@@ -7,6 +7,8 @@ import 'selector.dart';
 /// Resolver for resolving the features, that are selected by a
 /// [TileLayerSelector].
 abstract class LayerFeatureResolver {
+  const LayerFeatureResolver();
+
   /// Provides the features resolved using the given [selector].
   Iterable<LayerFeature> resolveFeatures(TileLayerSelector selector, int zoom);
 }
@@ -14,7 +16,7 @@ abstract class LayerFeatureResolver {
 /// Default implementation of [LayerFeatureResolver] that resolves
 /// features from a [tileset].
 class DefaultLayerFeatureResolver implements LayerFeatureResolver {
-  DefaultLayerFeatureResolver(this._tileset);
+  const DefaultLayerFeatureResolver(this._tileset);
 
   final Tileset _tileset;
 
@@ -72,7 +74,7 @@ class CachingLayerFeatureResolver implements LayerFeatureResolver {
 }
 
 class LayerFeature {
-  LayerFeature(this.layer, this.feature);
+  const LayerFeature(this.layer, this.feature);
 
   final TileLayer layer;
   final TileFeature feature;

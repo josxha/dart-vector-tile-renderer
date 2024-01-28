@@ -3,7 +3,7 @@ import '../image_expression.dart';
 import 'expression_parser.dart';
 
 class ImageExpressionParser extends ExpressionComponentParser {
-  ImageExpressionParser(ExpressionParser parser) : super(parser, 'image');
+  const ImageExpressionParser(ExpressionParser parser) : super(parser, 'image');
 
   @override
   bool matches(List<dynamic> json) {

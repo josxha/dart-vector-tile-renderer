@@ -14,6 +14,7 @@ class TileFactory {
   final Theme theme;
   late final Set<String> propertyNames;
   late final Set<String> layerNames;
+
   TileFactory(this.theme, this.logger) {
     final layers =
         theme.layers.whereType<DefaultLayer>().toList(growable: false);

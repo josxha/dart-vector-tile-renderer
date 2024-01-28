@@ -4,7 +4,7 @@ class ConditionOutputPair {
   final Expression condition;
   final Expression output;
 
-  ConditionOutputPair(this.condition, this.output);
+  const ConditionOutputPair(this.condition, this.output);
 
   String toCacheKey() => '${condition.cacheKey}:${output.cacheKey}';
 }

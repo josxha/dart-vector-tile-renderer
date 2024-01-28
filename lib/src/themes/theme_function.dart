@@ -39,7 +39,7 @@ class _ZoomValue<T> {
   final double zoom;
   final T? value;
 
-  _ZoomValue(this.zoom, this.value);
+  const _ZoomValue(this.zoom, this.value);
 
   bool isCloseTo(double zoom) {
     if (zoom == this.zoom) {

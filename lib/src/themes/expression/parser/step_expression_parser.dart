@@ -3,7 +3,7 @@ import '../step_expression.dart';
 import 'expression_parser.dart';
 
 class StepExpressionParser extends ExpressionComponentParser {
-  StepExpressionParser(ExpressionParser parser) : super(parser, 'step');
+  const StepExpressionParser(ExpressionParser parser) : super(parser, 'step');
 
   @override
   bool matches(List<dynamic> json) {

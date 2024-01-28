@@ -5,7 +5,7 @@ import 'expression_parser.dart';
 class NaryMathExpressionParser extends ExpressionComponentParser {
   final String _operationName;
   final BinaryOperation _operation;
-  NaryMathExpressionParser(
+  const NaryMathExpressionParser(
       ExpressionParser parser, this._operationName, this._operation)
       : super(parser, _operationName);
 
@@ -31,7 +31,7 @@ class NaryMathExpressionParser extends ExpressionComponentParser {
 class UnaryMathExpressionParser extends ExpressionComponentParser {
   final String _operationName;
   final UnaryOperation _operation;
-  UnaryMathExpressionParser(
+  const UnaryMathExpressionParser(
       ExpressionParser parser, this._operationName, this._operation)
       : super(parser, _operationName);
 

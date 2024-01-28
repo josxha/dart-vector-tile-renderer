@@ -5,7 +5,7 @@ import 'tile_model.dart';
 class TileData {
   final List<TileDataLayer> layers;
 
-  TileData({required this.layers});
+  const TileData({required this.layers});
 
   Tile toTile() =>
       Tile(layers: layers.map((e) => e.toTileLayer()).toList(growable: false));
@@ -16,7 +16,7 @@ class TileDataLayer {
   final int extent;
   final List<TileDataFeature> features;
 
-  TileDataLayer(
+  const TileDataLayer(
       {required this.name, required this.extent, required this.features});
 
   TileLayer toTileLayer() => TileLayer(

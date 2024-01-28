@@ -21,7 +21,7 @@ class Style {
   final Expression<List<Shadow>>? textHalo;
   final Expression<PaintModel>? outlinePaint;
 
-  Style(
+  const Style(
       {this.fillPaint,
       this.fillExtrusion,
       this.outlinePaint,
@@ -33,32 +33,40 @@ class Style {
 
 class LayoutPlacement {
   final String name;
+
   const LayoutPlacement._(this.name);
+
   static const point = LayoutPlacement._('point');
   static const line = LayoutPlacement._('line');
   static const lineCenter = LayoutPlacement._('line-center');
   static const DEFAULT = point;
 
   static List<LayoutPlacement> values() => [point, line, lineCenter];
+
   static LayoutPlacement fromName(String? name) =>
       values().where((v) => v.name == name).firstOrNull() ?? DEFAULT;
 }
 
 class LayoutAnchor {
   final String name;
+
   const LayoutAnchor._(this.name);
+
   static const center = LayoutAnchor._('center');
   static const top = LayoutAnchor._('top');
   static const DEFAULT = center;
 
   static List<LayoutAnchor> values() => [center, top];
+
   static LayoutAnchor fromName(String? name) =>
       values().where((v) => v.name == name).firstOrNull() ?? DEFAULT;
 }
 
 class LayoutJustify {
   final String name;
+
   const LayoutJustify._(this.name);
+
   static const center = LayoutJustify._('center');
   static const left = LayoutJustify._('left');
   static const right = LayoutJustify._('right');
@@ -66,19 +74,23 @@ class LayoutJustify {
   static const DEFAULT = center;
 
   static List<LayoutJustify> values() => [center, left, right, auto];
+
   static LayoutJustify fromName(String? name) =>
       values().where((v) => v.name == name).firstOrNull() ?? DEFAULT;
 }
 
 class RotationAlignment {
   final String name;
+
   const RotationAlignment._(this.name);
+
   static const map = RotationAlignment._('map');
   static const viewport = RotationAlignment._('viewport');
   static const auto = RotationAlignment._('auto');
   static const DEFAULT = auto;
 
   static List<RotationAlignment> values() => [map, viewport, auto];
+
   static RotationAlignment fromName(String? name) =>
       values().where((v) => v.name == name).firstOrNull() ?? DEFAULT;
 }
@@ -88,7 +100,7 @@ class SymbolLayout {
   final TextLayout? text;
   final IconLayout? icon;
 
-  SymbolLayout({
+  const SymbolLayout({
     required this.placement,
     this.text,
     this.icon,
@@ -103,7 +115,7 @@ class IconLayout {
   final Expression<RotationAlignment>? rotationAlignment;
   final Expression<double>? rotate;
 
-  IconLayout(
+  const IconLayout(
       {required this.icon,
       required this.anchor,
       required this.opacity,
@@ -124,7 +136,7 @@ class TextLayout {
   final TextTransformFunction? textTransform;
   final Expression<RotationAlignment>? rotationAlignment;
 
-  TextLayout(
+  const TextLayout(
       {required this.anchor,
       required this.justify,
       required this.text,
@@ -139,26 +151,32 @@ class TextLayout {
 
 class LineCap {
   final String name;
+
   const LineCap._(this.name);
+
   static const butt = LineCap._('butt');
   static const round = LineCap._('round');
   static const square = LineCap._('square');
   static const DEFAULT = butt;
 
   static List<LineCap> values() => [butt, round, square];
+
   static LineCap fromName(String? name) =>
       values().where((v) => v.name == name).firstOrNull() ?? DEFAULT;
 }
 
 class LineJoin {
   final String name;
+
   const LineJoin._(this.name);
+
   static const bevel = LineJoin._('bevel');
   static const round = LineJoin._('round');
   static const miter = LineJoin._('miter');
   static const DEFAULT = miter;
 
   static List<LineJoin> values() => [bevel, round, miter];
+
   static LineJoin fromName(String? name) =>
       values().where((v) => v.name == name).firstOrNull() ?? DEFAULT;
 }
@@ -167,7 +185,7 @@ class Extrusion {
   final Expression<double>? base;
   final Expression<double>? height;
 
-  Extrusion({this.base, this.height});
+  const Extrusion({this.base, this.height});
 
   double calculateHeight(EvaluationContext context) {
     final base = this.base?.evaluate(context) ?? 0;

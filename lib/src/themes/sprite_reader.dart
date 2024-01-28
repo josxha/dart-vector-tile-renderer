@@ -8,7 +8,7 @@ import 'sprite.dart';
 class SpriteIndexReader {
   final Logger logger;
 
-  SpriteIndexReader({this.logger = const Logger.noop()});
+  const SpriteIndexReader({this.logger = const Logger.noop()});
 
   SpriteIndex read(Map<String, dynamic> json) {
     return SpriteIndex(Map.fromEntries(json.entries

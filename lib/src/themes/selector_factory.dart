@@ -4,7 +4,7 @@ import 'selector.dart';
 
 class SelectorFactory {
   final Logger logger;
-  SelectorFactory(this.logger);
+  const SelectorFactory(this.logger);
 
   TileLayerSelector create(themeLayer) {
     final source = themeLayer['source'];

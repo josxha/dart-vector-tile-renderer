@@ -14,7 +14,7 @@ class DefaultLayer extends ThemeLayer {
   final TileLayerSelector selector;
   final Style style;
 
-  DefaultLayer(super.id, super.type,
+  const DefaultLayer(super.id, super.type,
       {required this.selector,
       required this.style,
       required super.minzoom,
@@ -65,7 +65,7 @@ class DefaultLayer extends ThemeLayer {
 class BackgroundLayer extends ThemeLayer {
   final Expression<Color> fillColor;
 
-  BackgroundLayer(String id, this.fillColor, Map<String, dynamic> metadata)
+  const BackgroundLayer(String id, this.fillColor, Map<String, dynamic> metadata)
       : super(id, ThemeLayerType.background,
             minzoom: 0, maxzoom: 24, metadata: metadata);
 

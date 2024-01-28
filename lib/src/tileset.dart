@@ -36,7 +36,7 @@ class TilesetPreprocessor {
   /// [theme] the theme to use for preprocessing
   /// [initializeGeometry] whether to initialize geometry as part of preprocessing.
   ///                      Defaults to false, only safe to use on the UI isolate.
-  TilesetPreprocessor(this.theme, {bool initializeGeometry = false})
+  const TilesetPreprocessor(this.theme, {bool initializeGeometry = false})
       : _initializeGeometry = initializeGeometry;
 
   /// Pre-processes a tileset to eliminate some expensive processing from

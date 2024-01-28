@@ -6,7 +6,7 @@ import '../string_expression.dart';
 import 'expression_parser.dart';
 
 class ToStringExpressionParser extends ExpressionComponentParser {
-  ToStringExpressionParser(ExpressionParser parser)
+  const ToStringExpressionParser(ExpressionParser parser)
       : super(parser, 'to-string');
 
   @override
@@ -25,7 +25,7 @@ class ToStringExpressionParser extends ExpressionComponentParser {
 }
 
 class CoalesceExpressionParser extends ExpressionComponentParser {
-  CoalesceExpressionParser(ExpressionParser parser) : super(parser, 'coalesce');
+  const CoalesceExpressionParser(ExpressionParser parser) : super(parser, 'coalesce');
 
   @override
   bool matches(List<dynamic> json) {
@@ -47,7 +47,7 @@ class CoalesceExpressionParser extends ExpressionComponentParser {
 }
 
 class ConcatExpressionParser extends ExpressionComponentParser {
-  ConcatExpressionParser(ExpressionParser parser) : super(parser, 'concat');
+  const ConcatExpressionParser(ExpressionParser parser) : super(parser, 'concat');
 
   @override
   bool matches(List<dynamic> json) {
@@ -69,7 +69,7 @@ class ConcatExpressionParser extends ExpressionComponentParser {
 }
 
 class StringExpressionParser extends ExpressionComponentParser {
-  StringExpressionParser(ExpressionParser parser) : super(parser, 'string');
+  const StringExpressionParser(ExpressionParser parser) : super(parser, 'string');
 
   @override
   bool matches(List<dynamic> json) {
@@ -91,7 +91,7 @@ class StringExpressionParser extends ExpressionComponentParser {
 }
 
 class GeometryTypeExpressionParser extends ExpressionComponentParser {
-  GeometryTypeExpressionParser(ExpressionParser parser)
+  const GeometryTypeExpressionParser(ExpressionParser parser)
       : super(parser, 'geometry-type');
 
   @override

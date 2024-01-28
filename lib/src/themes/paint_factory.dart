@@ -49,7 +49,7 @@ class PaintStyle {
   final Expression<LineJoin>? lineJoin;
   final List<double>? strokeDashPattern;
 
-  PaintStyle(
+  const PaintStyle(
       {required this.id,
       required this.paintingStyle,
       required this.color,

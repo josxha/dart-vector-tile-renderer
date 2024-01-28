@@ -33,7 +33,7 @@ class TileSelector {
 
 abstract class LayerSelector {
   final String cacheKey;
-  LayerSelector._(this.cacheKey);
+  const LayerSelector._(this.cacheKey);
 
   factory LayerSelector.none() = _NoneLayerSelector;
   factory LayerSelector.composite(List<LayerSelector> selectors) =

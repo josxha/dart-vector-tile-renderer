@@ -6,7 +6,7 @@ import '../literal_expression.dart';
 import 'expression_parser.dart';
 
 class HasExpressionParser extends ExpressionComponentParser {
-  HasExpressionParser(ExpressionParser parser) : super(parser, 'has');
+  const HasExpressionParser(ExpressionParser parser) : super(parser, 'has');
 
   @override
   bool matches(List<dynamic> json) {
@@ -24,7 +24,7 @@ class HasExpressionParser extends ExpressionComponentParser {
 }
 
 class NotHasExpressionParser extends ExpressionComponentParser {
-  NotHasExpressionParser(ExpressionParser parser) : super(parser, '!has');
+  const NotHasExpressionParser(ExpressionParser parser) : super(parser, '!has');
 
   @override
   bool matches(List<dynamic> json) {
@@ -42,7 +42,7 @@ class NotHasExpressionParser extends ExpressionComponentParser {
 }
 
 class InExpressionParser extends ExpressionComponentParser {
-  InExpressionParser(ExpressionParser parser) : super(parser, 'in');
+  const InExpressionParser(ExpressionParser parser) : super(parser, 'in');
 
   @override
   bool matches(List<dynamic> json) {
@@ -61,7 +61,7 @@ class InExpressionParser extends ExpressionComponentParser {
 }
 
 class NotInExpressionParser extends ExpressionComponentParser {
-  NotInExpressionParser(ExpressionParser parser) : super(parser, '!in');
+  const NotInExpressionParser(ExpressionParser parser) : super(parser, '!in');
 
   @override
   bool matches(List<dynamic> json) {
@@ -80,7 +80,7 @@ class NotInExpressionParser extends ExpressionComponentParser {
 }
 
 class NotExpressionParser extends ExpressionComponentParser {
-  NotExpressionParser(ExpressionParser parser) : super(parser, '!');
+  const NotExpressionParser(ExpressionParser parser) : super(parser, '!');
 
   @override
   bool matches(List<dynamic> json) {
@@ -98,7 +98,7 @@ class NotExpressionParser extends ExpressionComponentParser {
 }
 
 class EqualsExpressionParser extends ExpressionComponentParser {
-  EqualsExpressionParser(ExpressionParser parser) : super(parser, '==');
+  const EqualsExpressionParser(ExpressionParser parser) : super(parser, '==');
 
   @override
   bool matches(List<dynamic> json) {
@@ -119,7 +119,8 @@ class EqualsExpressionParser extends ExpressionComponentParser {
 }
 
 class NotEqualsExpressionParser extends ExpressionComponentParser {
-  NotEqualsExpressionParser(ExpressionParser parser) : super(parser, '!=');
+  const NotEqualsExpressionParser(ExpressionParser parser)
+      : super(parser, '!=');
 
   @override
   bool matches(List<dynamic> json) {
@@ -139,7 +140,11 @@ class NotEqualsExpressionParser extends ExpressionComponentParser {
 class ComparisonExpressionParser extends ExpressionComponentParser {
   final bool Function(num, num) _comparison;
 
-  ComparisonExpressionParser(super.parser, super.operator, this._comparison);
+  const ComparisonExpressionParser(
+    super.parser,
+    super.operator,
+    this._comparison,
+  );
 
   @override
   bool matches(List<dynamic> json) {
@@ -160,7 +165,7 @@ class ComparisonExpressionParser extends ExpressionComponentParser {
 }
 
 class AllExpressionParser extends ExpressionComponentParser {
-  AllExpressionParser(ExpressionParser parser) : super(parser, 'all');
+  const AllExpressionParser(ExpressionParser parser) : super(parser, 'all');
 
   @override
   Expression? parse(List<dynamic> json) {
@@ -174,7 +179,7 @@ class AllExpressionParser extends ExpressionComponentParser {
 }
 
 class AnyExpressionParser extends ExpressionComponentParser {
-  AnyExpressionParser(ExpressionParser parser) : super(parser, 'any');
+  const AnyExpressionParser(ExpressionParser parser) : super(parser, 'any');
 
   @override
   Expression? parse(List<dynamic> json) {
@@ -188,7 +193,7 @@ class AnyExpressionParser extends ExpressionComponentParser {
 }
 
 class MatchExpressionParser extends ExpressionComponentParser {
-  MatchExpressionParser(ExpressionParser parser) : super(parser, 'match');
+  const MatchExpressionParser(ExpressionParser parser) : super(parser, 'match');
 
   @override
   bool matches(List<dynamic> json) {
@@ -230,7 +235,7 @@ class MatchExpressionParser extends ExpressionComponentParser {
 }
 
 class CaseExpressionParser extends ExpressionComponentParser {
-  CaseExpressionParser(ExpressionParser parser) : super(parser, 'case');
+  const CaseExpressionParser(ExpressionParser parser) : super(parser, 'case');
 
   @override
   bool matches(List<dynamic> json) {
@@ -261,7 +266,7 @@ class CaseExpressionParser extends ExpressionComponentParser {
 }
 
 class IsSupportedScriptExpressionParser extends ExpressionComponentParser {
-  IsSupportedScriptExpressionParser(ExpressionParser parser)
+  const IsSupportedScriptExpressionParser(ExpressionParser parser)
       : super(parser, 'is-supported-script');
 
   @override

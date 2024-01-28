@@ -3,7 +3,7 @@ import '../expression.dart';
 import 'expression_parser.dart';
 
 class ToBooleanExpressionParser extends ExpressionComponentParser {
-  ToBooleanExpressionParser(ExpressionParser parser)
+  const ToBooleanExpressionParser(ExpressionParser parser)
       : super(parser, 'to-boolean');
 
   @override

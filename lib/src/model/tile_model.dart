@@ -6,7 +6,7 @@ import 'geometry_model_ui.dart';
 class Tile {
   final List<TileLayer> layers;
 
-  Tile({required this.layers});
+  const Tile({required this.layers});
 }
 
 class TileLayer {
@@ -14,7 +14,11 @@ class TileLayer {
   final int extent;
   final List<TileFeature> features;
 
-  TileLayer({required this.name, required this.extent, required this.features});
+  const TileLayer({
+    required this.name,
+    required this.extent,
+    required this.features,
+  });
 }
 
 class BoundedPath {

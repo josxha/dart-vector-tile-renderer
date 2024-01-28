@@ -4,7 +4,7 @@ class SymbolStyle {
   final TextStyle textStyle;
   final TextAlign textAlign;
 
-  SymbolStyle({required this.textStyle, required this.textAlign});
+  const SymbolStyle({required this.textStyle, required this.textAlign});
 
   @override
   bool operator ==(Object other) => (other is SymbolStyle &&
@@ -33,7 +33,7 @@ class StyledSymbol {
   final SymbolStyle style;
   final String text;
 
-  StyledSymbol({required this.style, required this.text});
+  const StyledSymbol({required this.style, required this.text});
 
   @override
   bool operator ==(Object other) =>

@@ -20,7 +20,7 @@ class TileSource {
   /// If absent, sprites are ignored when rendering.
   final Image? spriteAtlas;
 
-  TileSource(
+  const TileSource(
       {required this.tileset,
       this.spriteIndex,
       this.spriteAtlas,

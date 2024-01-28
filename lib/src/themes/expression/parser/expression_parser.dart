@@ -199,7 +199,7 @@ abstract class ExpressionComponentParser {
   final ExpressionParser parser;
   final String operator;
 
-  ExpressionComponentParser(this.parser, this.operator);
+  const ExpressionComponentParser(this.parser, this.operator);
 
   bool matches(List<dynamic> json) {
     return json.isNotEmpty && json[0] == operator;

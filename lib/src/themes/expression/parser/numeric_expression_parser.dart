@@ -3,7 +3,7 @@ import '../numeric_expression.dart';
 import 'expression_parser.dart';
 
 class ToNumberExpressionParser extends ExpressionComponentParser {
-  ToNumberExpressionParser(ExpressionParser parser)
+  const ToNumberExpressionParser(ExpressionParser parser)
       : super(parser, 'to-number');
 
   @override

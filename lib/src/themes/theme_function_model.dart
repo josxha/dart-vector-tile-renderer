@@ -6,17 +6,19 @@ class FunctionModel<T> {
   final T? base;
   final List<FunctionStop<T>> stops;
 
-  FunctionModel(this.base, this.stops);
+  const FunctionModel(this.base, this.stops);
 }
 
 class FunctionStop<T> {
   final double zoom;
   final T value;
 
-  FunctionStop(this.zoom, this.value);
+  const FunctionStop(this.zoom, this.value);
 }
 
 class DoubleFunctionModelFactory {
+  const DoubleFunctionModelFactory();
+
   FunctionModel<double>? create(json) {
     double? base = (json['base'] as num?)?.toDouble();
     final stops = json['stops'] as List<dynamic>?;
@@ -37,6 +39,8 @@ class DoubleFunctionModelFactory {
 }
 
 class ColorFunctionModelFactory {
+  const ColorFunctionModelFactory();
+
   FunctionModel<Color>? create(json) {
     Color? base = json['base'] is String
         ? ColorParser.toColor(json['base'] as String?)

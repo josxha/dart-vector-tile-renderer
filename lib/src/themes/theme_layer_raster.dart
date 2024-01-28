@@ -9,13 +9,13 @@ import 'selector.dart';
 class RasterPaintModel {
   final Expression<double> opacity;
 
-  RasterPaintModel({required this.opacity});
+  const RasterPaintModel({required this.opacity});
 }
 
 class ThemeLayerRaster extends ThemeLayer {
   final TileLayerSelector selector;
   final RasterPaintModel paintModel;
-  ThemeLayerRaster(super.id, super.type,
+  const ThemeLayerRaster(super.id, super.type,
       {required this.selector,
       required this.paintModel,
       required super.minzoom,

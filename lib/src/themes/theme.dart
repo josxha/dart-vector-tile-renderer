@@ -7,7 +7,8 @@ class Theme {
   /// the version of the theme
   final String version;
   final List<ThemeLayer> layers;
-  Theme({required this.id, required this.version, required this.layers});
+
+  const Theme({required this.id, required this.version, required this.layers});
 
   /// Provides a copy of this theme that only has layers that match
   /// the given [zoom].
@@ -54,7 +55,8 @@ abstract class ThemeLayer {
   final double? minzoom;
   final double? maxzoom;
   final Map<String, dynamic> metadata;
-  ThemeLayer(this.id, this.type,
+
+  const ThemeLayer(this.id, this.type,
       {required this.minzoom, required this.maxzoom, required this.metadata});
 
   String? get tileSource;
