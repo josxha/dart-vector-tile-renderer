@@ -69,9 +69,8 @@ class TileFeature {
     }
     final modelPoints = _modelPoints;
     if (modelPoints != null) {
-      final uiGeometry = UiGeometry();
       _points = modelPoints
-          .map((e) => uiGeometry.createPoint(e))
+          .map((e) => UiGeometry.createPoint(e))
           .toList(growable: false);
       _modelPoints = null;
     }
@@ -108,18 +107,16 @@ class TileFeature {
     final modelLines = _modelLines;
     if (modelLines != null) {
       assert(type == TileFeatureType.linestring);
-      final uiGeometry = UiGeometry();
       _paths = modelLines
-          .map((e) => BoundedPath(uiGeometry.createLine(e)))
+          .map((e) => BoundedPath(UiGeometry.createLine(e)))
           .toList(growable: false);
       _modelLines = null;
     }
     final modelPolygons = _modelPolygons;
     if (modelPolygons != null) {
       assert(type == TileFeatureType.polygon);
-      final uiGeometry = UiGeometry();
       _paths = modelPolygons
-          .map((e) => BoundedPath(uiGeometry.createPolygon(e)))
+          .map((e) => BoundedPath(UiGeometry.createPolygon(e)))
           .toList(growable: false);
       _modelPolygons = null;
     }

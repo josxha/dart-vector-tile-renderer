@@ -15,8 +15,6 @@ int command(int command, int length) => length << 3 | command;
 int zigZag(int n) => ((n << 1) ^ (n >> 31)).toSigned(32);
 
 void main() {
-  final uiGeometry = UiGeometry();
-
   group('point', () {
     test('single point', () {
       final points = decodePoints([
@@ -53,7 +51,7 @@ void main() {
       ]).toList();
 
       expect(lines, hasLength(1));
-      final metric = uiGeometry.createLine(lines[0]).computeMetrics().first;
+      final metric = UiGeometry.createLine(lines[0]).computeMetrics().first;
       expect(metric.getTangentForOffset(0)!.position, const Offset(0, 1));
       expect(metric.getTangentForOffset(metric.length)!.position,
           const Offset(2, 4));
@@ -78,7 +76,7 @@ void main() {
       expect(lines, hasLength(2));
 
       final line0Metric =
-          uiGeometry.createLine(lines[0]).computeMetrics().first;
+          UiGeometry.createLine(lines[0]).computeMetrics().first;
       expect(
         line0Metric.getTangentForOffset(0)!.position,
         const Offset(0, 1),
@@ -89,7 +87,7 @@ void main() {
       );
 
       final line1Metric =
-          uiGeometry.createLine(lines[1]).computeMetrics().first;
+          UiGeometry.createLine(lines[1]).computeMetrics().first;
       expect(
         line1Metric.getTangentForOffset(0)!.position,
         const Offset(2, 5),
@@ -122,7 +120,7 @@ void main() {
       expect(polygons, hasLength(1));
 
       final polygonMetrics =
-          uiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
+      UiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
       expect(polygonMetrics, hasLength(1));
 
       final ringMetric = polygonMetrics[0];
@@ -168,7 +166,7 @@ void main() {
       ]).toList();
 
       final polygonMetrics =
-          uiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
+      UiGeometry.createPolygon(polygons[0]).computeMetrics().toList();
       expect(polygonMetrics, hasLength(2));
 
       final innerRingMetric = polygonMetrics[1];
