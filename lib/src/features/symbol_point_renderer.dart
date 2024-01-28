@@ -16,7 +16,7 @@ import 'text_wrapper.dart';
 
 class SymbolPointRenderer extends FeatureRenderer {
   final Logger logger;
-  SymbolPointRenderer(this.logger);
+  const SymbolPointRenderer(this.logger);
 
   @override
   void render(

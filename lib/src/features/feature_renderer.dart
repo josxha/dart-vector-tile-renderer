@@ -9,6 +9,8 @@ import 'symbol_line_renderer.dart';
 import 'symbol_point_renderer.dart';
 
 abstract class FeatureRenderer {
+  const FeatureRenderer();
+
   void render(
     Context context,
     ThemeLayerType layerType,

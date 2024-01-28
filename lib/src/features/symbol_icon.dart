@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 abstract class SymbolIcon {
+  const SymbolIcon();
+
   RenderedIcon? render(Offset offset,
       {required Size contentSize, required bool withRotation});
 }
@@ -10,7 +12,7 @@ class RenderedIcon {
   final Rect area;
   final Rect contentArea;
 
-  RenderedIcon(
+  const RenderedIcon(
       {required this.overlapsText,
       required this.area,
       required this.contentArea});

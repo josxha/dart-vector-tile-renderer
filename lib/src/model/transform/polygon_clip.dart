@@ -11,7 +11,7 @@ import 'geometry_clip.dart';
 class PolygonClip {
   final ClipArea bounds;
 
-  PolygonClip(this.bounds);
+  const PolygonClip(this.bounds);
 
   TilePolygon? clip(TilePolygon polygon) {
     final rings = <TileLine>[];

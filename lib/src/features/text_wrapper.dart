@@ -4,7 +4,7 @@ import '../themes/style.dart';
 class TextWrapper {
   final TextLayout layout;
 
-  TextWrapper(this.layout);
+  const TextWrapper(this.layout);
 
   List<String> wrap(EvaluationContext context, String text) {
     double? textSize = layout.textSize.evaluate(context);

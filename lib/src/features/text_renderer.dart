@@ -93,7 +93,7 @@ class TextApproximation {
     final textTransform = style.symbolLayout!.text?.textTransform;
     final transformedText = textTransform?.call(text) ?? text;
     final alignment =
-    style.symbolLayout!.text?.justify.evaluate(evaluationContext);
+        style.symbolLayout!.text?.justify.evaluate(evaluationContext);
     return StyledSymbol(
         style: SymbolStyle(
             textAlign: alignment?.toTextAlign() ?? TextAlign.center,
@@ -106,12 +106,15 @@ class TextRenderer {
   final Context context;
   final Style style;
   final StyledSymbol symbol;
-  late final TextPainter? _painter;
+  final TextPainter? _painter;
   late final Offset? _translation;
 
-  TextRenderer(this.context, EvaluationContext evaluationContext, this.style,
-      this.symbol) {
-    _painter = context.textPainterProvider.provide(symbol);
+  TextRenderer(
+    this.context,
+    EvaluationContext evaluationContext,
+    this.style,
+    this.symbol,
+  ) : _painter = context.textPainterProvider.provide(symbol) {
     _translation = _layout(evaluationContext);
   }
 
@@ -170,9 +173,9 @@ Rect? _labelBox(Offset offset, Offset? translation, double width, double height,
 
 extension _LayoutJustifyExtension on LayoutJustify {
   TextAlign toTextAlign() => switch (this) {
-    LayoutJustify.center => TextAlign.center,
-    LayoutJustify.left => TextAlign.left,
-    LayoutJustify.right => TextAlign.left,
-    _ => TextAlign.center,
-  };
+        LayoutJustify.center => TextAlign.center,
+        LayoutJustify.left => TextAlign.left,
+        LayoutJustify.right => TextAlign.left,
+        _ => TextAlign.center,
+      };
 }

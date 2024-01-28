@@ -7,7 +7,7 @@ class TileClip {
   /// clip in pixel space
   final ClipArea bounds;
 
-  TileClip({required this.bounds});
+  const TileClip({required this.bounds});
 
   TileData clip(TileData original) => TileData(
       layers:

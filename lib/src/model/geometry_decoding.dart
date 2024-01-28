@@ -1,6 +1,6 @@
 import 'geometry_model.dart';
 
-class _Command {
+abstract class _Command {
   static const moveTo = 1;
   static const lineTo = 2;
   static const closePath = 7;

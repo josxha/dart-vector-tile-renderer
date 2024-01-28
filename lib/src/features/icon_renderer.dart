@@ -19,7 +19,7 @@ class IconRenderer extends SymbolIcon {
   final RotationAlignment rotationAlignment;
   final double? rotate;
 
-  IconRenderer(this.context,
+  const IconRenderer(this.context,
       {required this.sprite,
       required this.atlas,
       required this.size,
@@ -151,7 +151,7 @@ class _Segment {
   final Rect area;
   final Rect? contentArea;
 
-  _Segment(
+  const _Segment(
       {required this.imageSource,
       required this.scale,
       required this.area,

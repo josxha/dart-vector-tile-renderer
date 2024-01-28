@@ -17,7 +17,7 @@ import 'text_renderer.dart';
 class SymbolLineRenderer extends FeatureRenderer {
   final Logger logger;
 
-  SymbolLineRenderer(this.logger);
+  const SymbolLineRenderer(this.logger);
 
   @override
   void render(

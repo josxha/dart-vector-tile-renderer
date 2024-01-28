@@ -7,7 +7,7 @@ import 'feature_renderer.dart';
 
 class FillRenderer extends FeatureRenderer {
   final Logger logger;
-  FillRenderer(this.logger);
+  const FillRenderer(this.logger);
 
   @override
   void render(

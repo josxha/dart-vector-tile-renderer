@@ -44,7 +44,7 @@ class TileLine {
 class TilePolygon {
   final List<TileLine> rings;
 
-  TilePolygon(this.rings);
+  const TilePolygon(this.rings);
 
   Bounds bounds() => rings.first.bounds();
 

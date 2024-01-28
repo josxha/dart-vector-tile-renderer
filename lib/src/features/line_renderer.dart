@@ -10,7 +10,7 @@ import 'feature_renderer.dart';
 class LineRenderer extends FeatureRenderer {
   final Logger logger;
 
-  LineRenderer(this.logger);
+  const LineRenderer(this.logger);
 
   @override
   void render(

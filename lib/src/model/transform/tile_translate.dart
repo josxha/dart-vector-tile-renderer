@@ -5,7 +5,7 @@ import '../tile_data_model.dart';
 class TileTranslate {
   final TilePoint _offset;
 
-  TileTranslate(this._offset);
+  const TileTranslate(this._offset);
 
   TileData translate(TileData tile) => TileData(
       layers: tile.layers.map(_translateLayer).toList(growable: false));
