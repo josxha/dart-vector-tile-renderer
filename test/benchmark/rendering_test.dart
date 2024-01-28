@@ -39,7 +39,7 @@ class RenderPicture extends BenchmarkBase {
             ')');
 
   static Future<void> setupAll() async {
-    testTile = await readTestTile(ThemeReader().read(lightThemeData()));
+    testTile = await readTestTile(ThemeReader().read(lightThemeData));
   }
 
   static late final Tile testTile;
@@ -52,7 +52,7 @@ class RenderPicture extends BenchmarkBase {
 
   @override
   void setup() {
-    theme = ThemeReader().read(lightThemeData());
+    theme = ThemeReader().read(lightThemeData);
     final tileset = Tileset({'openmaptiles': testTile});
 
     this.tileset = preprocessTile

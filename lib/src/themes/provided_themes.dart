@@ -7,5 +7,5 @@ class ProvidedThemes {
   ProvidedThemes._();
 
   static Theme lightTheme({Logger? logger}) =>
-      ThemeReader(logger: logger).read(lightThemeData());
+      ThemeReader(logger: logger).read(lightThemeData);
 }
