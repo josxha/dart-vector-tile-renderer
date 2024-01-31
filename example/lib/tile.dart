@@ -67,7 +67,7 @@ class Tile extends StatefulWidget {
 
 class _TileState extends State<Tile> {
   Tileset? tileset;
-  final theme = ProvidedThemes.lightTheme(logger: const Logger.console());
+  final theme = ThemeReader(logger: const Logger.console()).read(seamarkTheme);
   ui.Image? image;
   bool _disposed = false;
 
