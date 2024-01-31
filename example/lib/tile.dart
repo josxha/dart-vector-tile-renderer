@@ -67,7 +67,7 @@ class Tile extends StatefulWidget {
 
 class _TileState extends State<Tile> {
   Tileset? tileset;
-  final theme = ThemeReader(logger: Logger.console()).read(seamarkTheme);
+  final theme = ProvidedThemes.lightTheme(logger: const Logger.console());
   ui.Image? image;
   bool _disposed = false;
 
@@ -97,7 +97,7 @@ class _TileState extends State<Tile> {
   Widget build(BuildContext context) {
     if (tileset == null ||
         (widget.options.renderMode == RenderMode.raster && image == null)) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     }
     return Container(
         decoration: BoxDecoration(color: Colors.black45, border: Border.all()),
@@ -113,7 +113,7 @@ class _TileState extends State<Tile> {
         .load('seamarks-9-269-178.mvt');
     final tileBytes = tileBuffer.buffer
         .asUint8List(tileBuffer.offsetInBytes, tileBuffer.lengthInBytes);
-    var tileData = TileFactory(theme, Logger.noop())
+    var tileData = TileFactory(theme, const Logger.noop())
         .createTileData(VectorTileReader().read(tileBytes));
     if (widget.options.clipSize > 0) {
       final clipSize = widget.options.clipSize;
